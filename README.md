@@ -4,6 +4,22 @@ Personal blog built with MkDocs Material, featuring AI/ML content and technical 
 
 ## 🚀 Quick Start
 
+### Using uv (recommended)
+```bash
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install dependencies
+uv sync
+
+# Serve locally
+uv run mkdocs serve
+
+# Build site
+uv run mkdocs build
+```
+
+### Using pip
 ```bash
 # Install dependencies
 pip install -r requirements-doc.txt
