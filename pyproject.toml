@@ -5,7 +5,7 @@ description = "Servando Torres's personal blog built with MkDocs Material"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
-    { name = "Servando Torres", email = "servando@servando.co" }
+    { name = "Servando Torres", email = "servando@controlthrive.com" }
 ]
 license = { file = "LICENSE" }
 keywords = ["blog", "mkdocs", "ai", "machine-learning", "technology"]
