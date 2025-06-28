@@ -1,0 +1,10 @@
+# Automation scripts dependencies
+requests
+typer
+rich
+openai
+instructor
+pydantic
+python-frontmatter
+pyyaml
+dub

@@ -1,0 +1,103 @@
+---
+import Layout from './Layout.astro';
+import { formatDate } from '../utils/dates';
+
+export interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  categories: string[];
+}
+
+const { title, date, description, categories } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <article>
+    <header class="post-header">
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <time datetime={date.toISOString()}>
+          {formatDate(date)}
+        </time>
+      </div>
+      {categories.length > 0 && (
+        <div class="categories">
+          {categories.map((category) => (
+            <a href={`/categories/${category.toLowerCase()}`} class="category">
+              {category}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+    
+    <div class="prose">
+      <slot />
+    </div>
+    
+    <nav class="post-nav">
+      <a href="/posts" class="back-link">← Back to all posts</a>
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .post-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .post-meta {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+  
+  .prose {
+    line-height: 1.7;
+    max-width: none;
+  }
+  
+  .prose > :first-child {
+    margin-top: 0;
+  }
+  
+  .prose > :last-child {
+    margin-bottom: 0;
+  }
+  
+  .post-nav {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  
+  .back-link:hover {
+    color: #2563eb;
+    text-decoration: none;
+    transform: translateX(-4px);
+  }
+  
+  @media (max-width: 768px) {
+    .post-header h1 {
+      font-size: 2rem;
+    }
+  }
+</style>

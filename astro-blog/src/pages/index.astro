@@ -1,0 +1,128 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getAllPosts } from '../utils/posts';
+import { formatDate } from '../utils/dates';
+
+const posts = await getAllPosts();
+const recentPosts = posts.slice(0, 5);
+---
+
+<Layout title="Servando's Blog - AI, ML, and Technology Insights">
+  <section class="hero">
+    <h1>Hi, I'm Servando 👋</h1>
+    <p class="hero-subtitle">
+      I write about AI, machine learning, and technology. 
+      Welcome to my digital garden where I share insights, experiments, and learnings.
+    </p>
+  </section>
+
+  <section class="recent-posts">
+    <h2>Recent Posts</h2>
+    
+    {recentPosts.length > 0 ? (
+      <>
+        <div class="post-list">
+          {recentPosts.map((post) => (
+            <article class="post-card">
+              <div class="post-meta">
+                {formatDate(post.data.date)}
+              </div>
+              <h3 class="post-title">
+                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              </h3>
+              {post.data.description && (
+                <p class="post-excerpt">{post.data.description}</p>
+              )}
+              {post.data.categories.length > 0 && (
+                <div class="categories">
+                  {post.data.categories.map((category) => (
+                    <a href={`/categories/${category.toLowerCase()}`} class="category">
+                      {category}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+        
+        <div class="view-all">
+          <a href="/posts" class="view-all-link">View all posts →</a>
+        </div>
+      </>
+    ) : (
+      <p>No posts yet. Start writing!</p>
+    )}
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--accent), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .recent-posts h2 {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+  
+  .view-all {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  .view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent);
+    color: white !important;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  
+  .view-all-link:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 2rem 0;
+      margin-bottom: 3rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+  }
+</style>
