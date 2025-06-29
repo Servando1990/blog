@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 
 export async function getAllPosts() {
-  const posts = await getCollection('writing/posts');
+  const posts = await getCollection('posts');
   
   return posts
     .filter(post => post.data.published)

@@ -39,13 +39,14 @@ async def generate_ai_frontmatter(
         tags: List[str]
         categories: List[
             Literal[
-                "RAG",
+                
                 "Applied AI",
-                "Losing my Hands",
+                "Machine Learning",
                 "Entrepreneurship",
                 "Personal Growth",
                 "Software Engineering",
-                "Writing and Communication",
+                "Leadership",
+                "Spirituality",
             ]
         ]
 

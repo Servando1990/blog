@@ -4,62 +4,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is Servando Torres's personal blog built with MkDocs Material. The site features AI/ML technical content and personal writing.
+This is Servando Torres's personal blog built with Astro. The site features AI/ML technical content and personal writing with modern web performance and type-safe content management.
 
 ## Build Commands
 
 ```bash
-# Install dependencies (using uv as preferred)
-uv pip install -r requirements-doc.txt
+# Install dependencies
+npm install
 
 # Development server with live reload
-mkdocs serve
+npm run dev
 
 # Build static site
-mkdocs build
-# or
-./build_mkdocs.sh
+npm run build
+
+# Preview production build
+npm run preview
 
 # Utility scripts
-python check_links.py          # Verify all links in markdown files
-python generate_sitemap.py     # Generate SEO sitemap with AI summaries
-python generate_desc.py        # Add AI-generated descriptions to posts
+python scripts/check_links.py          # Verify all links in markdown files
+python scripts/generate_sitemap.py     # Generate SEO sitemap with AI summaries
+python scripts/generate_desc.py        # Add AI-generated descriptions to posts
 ```
 
 ## Architecture
 
-The site uses MkDocs with Material theme for static site generation:
+The site uses Astro framework for modern static site generation:
 
-- **Content**: All markdown files in `docs/` directory
-- **Blog posts**: Located in `docs/writing/posts/`
-- **Configuration**: `mkdocs.yml` defines site structure, theme, and plugins
-- **Automation**: Python scripts for SEO optimization and link checking
-- **Styling**: Custom CSS in `docs/stylesheets/`, JS in `docs/javascripts/`
+- **Content**: Type-safe content collections in `src/content/writing/posts/`
+- **Blog posts**: Markdown files with frontmatter validation via Zod schemas
+- **Configuration**: `astro.config.mjs` defines integrations and build settings
+- **Automation**: Enhanced Python scripts for SEO optimization and link checking
+- **Components**: Astro components in `src/layouts/` and `src/pages/`
+- **Styling**: Scoped CSS within Astro components for consistent theming
 
 Key architectural decisions:
 
-- Static site generation for performance and hosting simplicity
-- Material Design for modern, responsive UI
-- Blog plugin for chronological content organization
+- Modern web framework with file-based routing and static generation
+- Type-safe content management with Astro content collections
+- Component-based architecture for reusability and maintainability
 - AI-powered tools for SEO metadata generation
-- YouTube color scheme for consistent branding
+- Built-in performance optimizations and modern JavaScript features
 
 ## Adding Content
 
 When adding new blog posts:
 
-1. Create markdown file in `docs/writing/posts/`
-2. Include frontmatter with date, authors, description, categories, and draft status
-3. Run `python generate_desc.py` to generate AI descriptions if needed
-4. Links should be verified with `python check_links.py`
+1. Create markdown file in `src/content/writing/posts/`
+2. Include frontmatter with date, title, description, categories, and published status
+3. Run `python scripts/generate_desc.py` to generate AI descriptions if needed
+4. Links should be verified with `python scripts/check_links.py`
+5. Categories automatically generate dynamic routes at `/categories/[category]`
 
 ## Important Notes
 
 - The site is live at https://servando.co/
 - Git repository: https://github.com/vandotorres/blog/
-- Uses YouTube color scheme (dark theme)
-- RSS feed available for blog posts
-- MathJax enabled for mathematical notation
+- Modern dark theme with consistent branding
+- RSS feed generation via Astro RSS integration
+- Type-safe content validation ensures data integrity
 
 ## Shortlink CLI Rule
 
