@@ -8,35 +8,43 @@ const recentPosts = posts.slice(0, 5);
 ---
 
 <Layout title="Servando's Blog - AI, ML, and Technology Insights">
-  <section class="hero">
-    <h1>Hi, I'm Servando 👋</h1>
-    <p class="hero-subtitle">
+  <section class="text-center mb-16 py-12">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-text-700 to-text-500 bg-clip-text text-transparent">
+      Hi, I'm Servando 👋
+    </h1>
+    <p class="text-xl text-text-600 dark:text-text-300 max-w-2xl mx-auto leading-relaxed">
       I write about AI, machine learning, and technology. 
       Welcome to my digital garden where I share insights, experiments, and learnings.
     </p>
   </section>
 
-  <section class="recent-posts">
-    <h2>Recent Posts</h2>
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-8 border-b-2 border-accent-500 pb-2 inline-block">
+      Recent Posts
+    </h2>
     
     {recentPosts.length > 0 ? (
       <>
-        <div class="post-list">
+        <div class="space-y-8">
           {recentPosts.map((post) => (
-            <article class="post-card">
-              <div class="post-meta">
+            <article class="bg-surface-100 dark:bg-surface-800 p-6 rounded-lg border border-surface-200 dark:border-surface-700 hover:border-accent-400 transition-all duration-200 hover:transform hover:-translate-y-1">
+              <div class="text-sm text-text-500 dark:text-text-400 mb-2">
                 {formatDate(post.data.date)}
               </div>
-              <h3 class="post-title">
-                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              <h3 class="text-xl font-semibold mb-3">
+                <a href={`/posts/${post.slug}`} class="text-text-800 dark:text-text-100 hover:text-accent-600 transition-colors">
+                  {post.data.title}
+                </a>
               </h3>
               {post.data.description && (
-                <p class="post-excerpt">{post.data.description}</p>
+                <p class="text-text-600 dark:text-text-300 leading-relaxed mb-4">
+                  {post.data.description}
+                </p>
               )}
               {post.data.categories.length > 0 && (
-                <div class="categories">
+                <div class="flex gap-2 flex-wrap">
                   {post.data.categories.map((category) => (
-                    <a href={`/categories/${category.toLowerCase()}`} class="category">
+                    <a href={`/categories/${category.toLowerCase()}`} class="bg-accent-500 hover:bg-accent-600 text-white px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 hover:transform hover:-translate-y-0.5">
                       {category}
                     </a>
                   ))}
@@ -46,83 +54,15 @@ const recentPosts = posts.slice(0, 5);
           ))}
         </div>
         
-        <div class="view-all">
-          <a href="/posts" class="view-all-link">View all posts →</a>
+        <div class="text-center mt-12">
+          <a href="/posts" class="inline-flex items-center gap-2 bg-text-600 hover:bg-text-700 text-surface-50 px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg">
+            View all posts →
+          </a>
         </div>
       </>
     ) : (
-      <p>No posts yet. Start writing!</p>
+      <p class="text-text-600 dark:text-text-400">No posts yet. Start writing!</p>
     )}
   </section>
 </Layout>
 
-<style>
-  .hero {
-    text-align: center;
-    margin-bottom: 4rem;
-    padding: 3rem 0;
-  }
-  
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--accent), #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-  }
-  
-  .recent-posts h2 {
-    margin-bottom: 2rem;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 0.5rem;
-    display: inline-block;
-  }
-  
-  .view-all {
-    text-align: center;
-    margin-top: 3rem;
-  }
-  
-  .view-all-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    background-color: var(--accent);
-    color: white !important;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    transition: all 0.2s;
-    text-decoration: none;
-  }
-  
-  .view-all-link:hover {
-    background-color: #2563eb;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
-  }
-  
-  @media (max-width: 768px) {
-    .hero {
-      padding: 2rem 0;
-      margin-bottom: 3rem;
-    }
-    
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.125rem;
-    }
-  }
-</style>

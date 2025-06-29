@@ -36,13 +36,14 @@ The site uses Astro framework for modern static site generation:
 - **Configuration**: `astro.config.mjs` defines integrations and build settings
 - **Automation**: Enhanced Python scripts for SEO optimization and link checking
 - **Components**: Astro components in `src/layouts/` and `src/pages/`
-- **Styling**: Scoped CSS within Astro components for consistent theming
+- **Styling**: Tailwind CSS with custom theme system and scoped components
 
 Key architectural decisions:
 
 - Modern web framework with file-based routing and static generation
 - Type-safe content management with Astro content collections
 - Component-based architecture for reusability and maintainability
+- Tailwind CSS with custom design system and dark mode support
 - AI-powered tools for SEO metadata generation
 - Built-in performance optimizations and modern JavaScript features
 

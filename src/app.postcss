@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  }
+  
+  body {
+    @apply bg-surface-50 dark:bg-surface-900 text-text-700 dark:text-text-200;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold text-text-800 dark:text-text-100;
+  }
+  
+  a {
+    @apply text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300 no-underline hover:underline transition-colors;
+  }
+  
+  p, li {
+    @apply text-text-600 dark:text-text-300 leading-relaxed;
+  }
+  
+  pre {
+    @apply bg-surface-800 text-surface-100 rounded-lg p-4 overflow-x-auto;
+  }
+  
+  code {
+    @apply bg-surface-200 dark:bg-surface-700 text-text-700 dark:text-text-200 px-1 py-0.5 rounded text-sm;
+  }
+  
+  pre code {
+    @apply bg-transparent p-0 text-inherit;
+  }
+  
+  /* Improve blockquote styling */
+  blockquote {
+    @apply border-l-4 border-accent-500 pl-4 italic text-text-600 dark:text-text-300 bg-surface-100 dark:bg-surface-800 py-3 my-4;
+  }
+}

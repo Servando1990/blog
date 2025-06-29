@@ -1,4 +1,6 @@
 ---
+import '../app.postcss';
+
 export interface Props {
   title: string;
   description?: string;
@@ -8,7 +10,7 @@ const { title, description = "AI, machine learning, and technology insights from
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -18,305 +20,28 @@ const { title, description = "AI, machine learning, and technology insights from
     <title>{title}</title>
   </head>
   <body>
-    <div class="container">
-      <header class="header">
-        <nav class="nav">
-          <a href="/" class="logo">Servando's Blog</a>
-          <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/writing">Writing</a>
-            <a href="/posts">Posts</a>
-            <a href="/categories">Categories</a>
-            <a href="/about">About</a>
+    <div class="container mx-auto max-w-4xl px-4 min-h-screen flex flex-col">
+      <header class="border-b border-surface-300 dark:border-surface-700 py-4 mb-8">
+        <nav class="flex justify-between items-center flex-col md:flex-row gap-4">
+          <a href="/" class="text-xl font-bold text-surface-950 dark:text-surface-50 hover:text-primary-500 transition-colors">Servando's Blog</a>
+          <div class="flex gap-6">
+            <a href="/" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Home</a>
+            <a href="/writing" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Writing</a>
+            <a href="/posts" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Posts</a>
+            <a href="/categories" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Categories</a>
+            <a href="/about" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">About</a>
           </div>
         </nav>
       </header>
 
-      <main class="main">
+      <main class="flex-1">
         <slot />
       </main>
 
-      <footer class="footer">
+      <footer class="border-t border-surface-300 dark:border-surface-700 py-8 mt-16 text-center text-surface-600 dark:text-surface-400">
         <p>&copy; 2024 Servando Torres. Built with Astro.</p>
       </footer>
     </div>
   </body>
 </html>
 
-<style is:global>
-  /* CSS Variables */
-  :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --accent: #3b82f6;
-    --border: #334155;
-  }
-
-  /* Reset */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  /* Base styles */
-  html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-  }
-
-  body {
-    line-height: 1.6;
-    min-height: 100vh;
-  }
-
-  /* Typography */
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary);
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-  }
-
-  h1 { font-size: 2.5rem; font-weight: 700; }
-  h2 { font-size: 2rem; font-weight: 600; }
-  h3 { font-size: 1.75rem; font-weight: 600; }
-  h4 { font-size: 1.5rem; font-weight: 500; }
-
-  p {
-    margin-bottom: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  a {
-    color: var(--accent);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-
-  a:hover {
-    color: #2563eb;
-    text-decoration: underline;
-  }
-
-  /* Code blocks */
-  pre {
-    background-color: var(--bg-secondary);
-    padding: 1rem;
-    border-radius: 0.5rem;
-    overflow-x: auto;
-    margin: 1rem 0;
-    border: 1px solid var(--border);
-  }
-
-  code {
-    background-color: var(--bg-secondary);
-    padding: 0.125rem 0.375rem;
-    border-radius: 0.25rem;
-    font-size: 0.875rem;
-    border: 1px solid var(--border);
-  }
-
-  pre code {
-    background: none;
-    padding: 0;
-    border: none;
-  }
-
-  /* Blockquotes */
-  blockquote {
-    border-left: 4px solid var(--accent);
-    padding-left: 1rem;
-    margin: 1.5rem 0;
-    font-style: italic;
-    color: var(--text-secondary);
-  }
-
-  /* Lists */
-  ul, ol {
-    margin: 1rem 0;
-    padding-left: 2rem;
-  }
-
-  li {
-    margin: 0.5rem 0;
-    color: var(--text-secondary);
-  }
-
-  /* Images */
-  img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 0.5rem;
-    margin: 1rem 0;
-  }
-
-  /* Heading anchor links */
-  .heading-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    margin-left: 0.5rem;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    font-weight: normal;
-  }
-
-  h1:hover .heading-link,
-  h2:hover .heading-link,
-  h3:hover .heading-link,
-  h4:hover .heading-link,
-  h5:hover .heading-link,
-  h6:hover .heading-link {
-    opacity: 1;
-  }
-
-  .heading-link:hover {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  /* Layout */
-  .container {
-    max-width: 1024px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .header {
-    border-bottom: 1px solid var(--border);
-    padding: 1rem 0;
-    margin-bottom: 2rem;
-  }
-
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--text-primary) !important;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .nav-links a {
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-
-  .nav-links a:hover {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  .main {
-    flex: 1;
-  }
-
-  .footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem 0;
-    margin-top: 4rem;
-    text-align: center;
-    color: var(--text-secondary);
-  }
-
-  /* Post styles */
-  .post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .post-card {
-    background-color: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-    border: 1px solid var(--border);
-    transition: all 0.2s;
-  }
-
-  .post-card:hover {
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .post-meta {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .post-title {
-    margin-bottom: 0.75rem;
-  }
-
-  .post-title a {
-    color: var(--text-primary);
-    font-weight: 600;
-  }
-
-  .post-excerpt {
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  .categories {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-  }
-
-  .category {
-    background-color: var(--accent);
-    color: white !important;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .category:hover {
-    background-color: #2563eb;
-    text-decoration: none;
-    transform: translateY(-1px);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .container {
-      padding: 0 0.75rem;
-    }
-    
-    .nav {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    
-    .nav-links {
-      gap: 1.5rem;
-    }
-    
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.75rem; }
-    
-    .post-card {
-      padding: 1rem;
-    }
-  }
-</style>
