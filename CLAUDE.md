@@ -31,7 +31,7 @@ python scripts/generate_desc.py        # Add AI-generated descriptions to posts
 
 The site uses Astro framework for modern static site generation:
 
-- **Content**: Type-safe content collections in `src/content/writing/posts/`
+- **Content**: Type-safe content collections in `src/content/posts/`
 - **Blog posts**: Markdown files with frontmatter validation via Zod schemas
 - **Configuration**: `astro.config.mjs` defines integrations and build settings
 - **Automation**: Enhanced Python scripts for SEO optimization and link checking
@@ -50,7 +50,7 @@ Key architectural decisions:
 
 When adding new blog posts:
 
-1. Create markdown file in `src/content/writing/posts/`
+1. Create markdown file in `src/content/posts/`
 2. Include frontmatter with date, title, description, categories, and published status
 3. Run `python scripts/generate_desc.py` to generate AI descriptions if needed
 4. Links should be verified with `python scripts/check_links.py`

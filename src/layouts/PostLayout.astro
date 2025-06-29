@@ -1,5 +1,6 @@
 ---
 import Layout from './Layout.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { formatDate } from '../utils/dates';
 
 export interface Props {
@@ -7,42 +8,64 @@ export interface Props {
   date: Date;
   description: string;
   categories: string[];
+  headings?: Array<{
+    depth: number;
+    slug: string;
+    text: string;
+  }>;
 }
 
-const { title, date, description, categories } = Astro.props;
+const { title, date, description, categories, headings = [] } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <article>
-    <header class="post-header">
-      <h1>{title}</h1>
-      <div class="post-meta">
-        <time datetime={date.toISOString()}>
-          {formatDate(date)}
-        </time>
-      </div>
-      {categories.length > 0 && (
-        <div class="categories">
-          {categories.map((category) => (
-            <a href={`/categories/${category.toLowerCase()}`} class="category">
-              {category}
-            </a>
-          ))}
+  <div class="post-container">
+    {headings.length > 0 && (
+      <TableOfContents headings={headings} />
+    )}
+    
+    <article class="post-content">
+      <header class="post-header">
+        <h1>{title}</h1>
+        <div class="post-meta">
+          <time datetime={date.toISOString()}>
+            {formatDate(date)}
+          </time>
         </div>
-      )}
-    </header>
-    
-    <div class="prose">
-      <slot />
-    </div>
-    
-    <nav class="post-nav">
-      <a href="/posts" class="back-link">← Back to all posts</a>
-    </nav>
-  </article>
+        {categories.length > 0 && (
+          <div class="categories">
+            {categories.map((category) => (
+              <a href={`/categories/${category.toLowerCase()}`} class="category">
+                {category}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+      
+      <div class="prose">
+        <slot />
+      </div>
+      
+      <nav class="post-nav">
+        <a href="/posts" class="back-link">← Back to all posts</a>
+      </nav>
+    </article>
+  </div>
 </Layout>
 
 <style>
+  .post-container {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+
+  .post-content {
+    flex: 1;
+    min-width: 0; /* Prevents flex item from overflowing */
+  }
+
   .post-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
@@ -60,6 +83,29 @@ const { title, date, description, categories } = Astro.props;
     font-size: 0.875rem;
     margin-bottom: 1rem;
   }
+
+  .categories {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .categories .category {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .categories .category:hover {
+    background-color: var(--accent);
+    color: white;
+    text-decoration: none;
+  }
   
   .prose {
     line-height: 1.7;
@@ -72,6 +118,32 @@ const { title, date, description, categories } = Astro.props;
   
   .prose > :last-child {
     margin-bottom: 0;
+  }
+
+  /* Ensure headings have proper IDs for anchor linking */
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    scroll-margin-top: 2rem;
+    position: relative;
+  }
+
+  /* Add hover effect for heading anchors */
+  .prose h1:hover::before,
+  .prose h2:hover::before,
+  .prose h3:hover::before,
+  .prose h4:hover::before,
+  .prose h5:hover::before,
+  .prose h6:hover::before {
+    content: '#';
+    position: absolute;
+    left: -1.5rem;
+    color: var(--accent);
+    font-weight: normal;
+    opacity: 0.7;
   }
   
   .post-nav {
@@ -94,10 +166,30 @@ const { title, date, description, categories } = Astro.props;
     text-decoration: none;
     transform: translateX(-4px);
   }
+
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .post-container {
+      flex-direction: column;
+    }
+  }
   
   @media (max-width: 768px) {
+    .post-container {
+      gap: 1rem;
+    }
+
     .post-header h1 {
       font-size: 2rem;
+    }
+    
+    .categories {
+      gap: 0.5rem;
+    }
+
+    .categories .category {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
     }
   }
 </style>
