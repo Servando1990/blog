@@ -1,68 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getAllPosts } from '../utils/posts';
-import { formatDate } from '../utils/dates';
-
-const posts = await getAllPosts();
-const recentPosts = posts.slice(0, 5);
 ---
 
 <Layout title="Servando's Blog - AI, ML, and Technology Insights">
-  <section class="text-center mb-16 py-12">
-    <h1 class="text-5xl md:text-6xl font-bold mb-6 text-surface-50">
+  <section class="text-center py-20">
+    <h1 class="text-5xl md:text-6xl font-bold mb-6">
       Hi, I'm Servando 👋
     </h1>
-    <p class="text-xl text-surface-50 max-w-2xl mx-auto leading-relaxed">
+    <p class="text-xl max-w-2xl mx-auto leading-relaxed mb-12">
       I write about AI, machine learning, and technology. 
       Welcome to my digital garden where I share insights, experiments, and learnings.
     </p>
-  </section>
-
-  <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-8 border-b-2 border-accent-500 pb-2 inline-block text-surface-50">
-      Recent Posts
-    </h2>
     
-    {recentPosts.length > 0 ? (
-      <>
-        <div class="space-y-8">
-          {recentPosts.map((post) => (
-            <article class="bg-black p-6 rounded-lg border border-gray-600 hover:border-accent-400 transition-all duration-200 hover:transform hover:-translate-y-1">
-              <div class="text-sm text-surface-50 mb-2">
-                {formatDate(post.data.date)}
-              </div>
-              <h3 class="text-xl font-semibold mb-3">
-                <a href={`/posts/${post.slug}`} class="text-surface-50 hover:text-accent-400 transition-colors">
-                  {post.data.title}
-                </a>
-              </h3>
-              {post.data.description && (
-                <p class="text-surface-50 leading-relaxed mb-4">
-                  {post.data.description}
-                </p>
-              )}
-              {post.data.categories.length > 0 && (
-                <div class="flex gap-2 flex-wrap">
-                  {post.data.categories.map((category) => (
-                    <a href={`/categories/${category.toLowerCase()}`} class="bg-accent-500 hover:bg-accent-600 text-white px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 hover:transform hover:-translate-y-0.5">
-                      {category}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
-        
-        <div class="text-center mt-12">
-          <a href="/posts" class="inline-flex items-center gap-2 bg-surface-700 hover:bg-surface-600 text-surface-50 px-8 py-3 rounded-lg font-semibold transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg">
-            View all posts →
-          </a>
-        </div>
-      </>
-    ) : (
-      <p class="text-surface-50">No posts yet. Start writing!</p>
-    )}
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="/posts" class="px-8 py-3 bg-black dark:bg-white text-white dark:text-black rounded hover:opacity-80 transition-opacity font-medium">
+        Explore my writing
+      </a>
+      <a href="https://cal.com/servando-torres-garcia-qco7rh/30min" target="_blank" rel="noopener noreferrer" class="px-8 py-3 border border-current rounded hover:opacity-80 transition-opacity font-medium">
+        Chat with me
+      </a>
+    </div>
   </section>
 </Layout>
 
