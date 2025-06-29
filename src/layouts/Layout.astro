@@ -1,5 +1,6 @@
 ---
 import '../app.postcss';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 export interface Props {
   title: string;
@@ -10,7 +11,7 @@ const { title, description = "AI, machine learning, and technology insights from
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -21,15 +22,14 @@ const { title, description = "AI, machine learning, and technology insights from
   </head>
   <body>
     <div class="container mx-auto max-w-4xl px-4 min-h-screen flex flex-col">
-      <header class="border-b border-surface-300 dark:border-surface-700 py-4 mb-8">
-        <nav class="flex justify-between items-center flex-col md:flex-row gap-4">
-          <a href="/" class="text-xl font-bold text-surface-950 dark:text-surface-50 hover:text-primary-500 transition-colors">Servando's Blog</a>
-          <div class="flex gap-6">
-            <a href="/" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Home</a>
-            <a href="/writing" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Writing</a>
-            <a href="/posts" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Posts</a>
-            <a href="/categories" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">Categories</a>
-            <a href="/about" class="text-surface-700 dark:text-surface-300 hover:text-primary-500 font-medium transition-colors">About</a>
+      <header class="py-8 mb-8">
+        <nav class="flex justify-between items-center">
+          <a href="/" class="text-xl font-bold">Servando's Blog</a>
+          <div class="flex gap-6 items-center">
+            <a href="/">Home</a>
+            <a href="/posts">Posts</a>
+            <a href="/about">About</a>
+            <ThemeToggle />
           </div>
         </nav>
       </header>
@@ -38,8 +38,8 @@ const { title, description = "AI, machine learning, and technology insights from
         <slot />
       </main>
 
-      <footer class="border-t border-surface-300 dark:border-surface-700 py-8 mt-16 text-center text-surface-600 dark:text-surface-400">
-        <p>&copy; 2024 Servando Torres. Built with Astro.</p>
+      <footer class="py-8 mt-16 text-center opacity-60">
+        <p>&copy; 2024 Servando Torres</p>
       </footer>
     </div>
   </body>

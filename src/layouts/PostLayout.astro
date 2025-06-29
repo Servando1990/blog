@@ -19,23 +19,23 @@ const { title, date, description, categories, headings = [] } = Astro.props;
 ---
 
 <Layout title={title} description={description}>
-  <div class="post-container">
+  <div class="flex gap-8 items-start flex-col xl:flex-row">
     {headings.length > 0 && (
       <TableOfContents headings={headings} />
     )}
     
-    <article class="post-content">
-      <header class="post-header">
-        <h1>{title}</h1>
-        <div class="post-meta">
+    <article class="flex-1 min-w-0">
+      <header class="mb-8 pb-6 border-b border-surface-700">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight text-surface-50">{title}</h1>
+        <div class="text-surface-300 text-sm mb-4">
           <time datetime={date.toISOString()}>
             {formatDate(date)}
           </time>
         </div>
         {categories.length > 0 && (
-          <div class="categories">
+          <div class="flex gap-3 flex-wrap">
             {categories.map((category) => (
-              <a href={`/categories/${category.toLowerCase()}`} class="category">
+              <a href={`/categories/${category.toLowerCase()}`} class="bg-surface-800 text-surface-50 px-3 py-1 rounded-full text-xs font-medium border border-surface-700 hover:bg-accent-500 hover:text-white transition-all duration-200">
                 {category}
               </a>
             ))}
@@ -43,83 +43,18 @@ const { title, date, description, categories, headings = [] } = Astro.props;
         )}
       </header>
       
-      <div class="prose">
+      <div class="prose prose-lg max-w-none text-surface-50">
         <slot />
       </div>
       
-      <nav class="post-nav">
-        <a href="/posts" class="back-link">← Back to all posts</a>
+      <nav class="mt-12 pt-8 border-t border-surface-700">
+        <a href="/posts" class="inline-flex items-center gap-2 text-surface-50 hover:text-accent-400 font-medium transition-all duration-200 hover:transform hover:-translate-x-1">← Back to all posts</a>
       </nav>
     </article>
   </div>
 </Layout>
 
 <style>
-  .post-container {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-  }
-
-  .post-content {
-    flex: 1;
-    min-width: 0; /* Prevents flex item from overflowing */
-  }
-
-  .post-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  .post-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-  
-  .post-meta {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: 1rem;
-  }
-
-  .categories {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .categories .category {
-    background-color: var(--bg-secondary);
-    color: var(--text-secondary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    border: 1px solid var(--border);
-    transition: all 0.2s;
-  }
-
-  .categories .category:hover {
-    background-color: var(--accent);
-    color: white;
-    text-decoration: none;
-  }
-  
-  .prose {
-    line-height: 1.7;
-    max-width: none;
-  }
-  
-  .prose > :first-child {
-    margin-top: 0;
-  }
-  
-  .prose > :last-child {
-    margin-bottom: 0;
-  }
-
   /* Ensure headings have proper IDs for anchor linking */
   .prose h1,
   .prose h2,
@@ -129,6 +64,7 @@ const { title, date, description, categories, headings = [] } = Astro.props;
   .prose h6 {
     scroll-margin-top: 2rem;
     position: relative;
+    color: #FDFBD4; /* Cream color for all headings */
   }
 
   /* Add hover effect for heading anchors */
@@ -141,55 +77,27 @@ const { title, date, description, categories, headings = [] } = Astro.props;
     content: '#';
     position: absolute;
     left: -1.5rem;
-    color: var(--accent);
+    color: #84B067; /* Sage green for anchor symbols */
     font-weight: normal;
     opacity: 0.7;
   }
-  
-  .post-nav {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-  
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--accent);
-    font-weight: 500;
-    transition: all 0.2s;
-  }
-  
-  .back-link:hover {
-    color: #2563eb;
-    text-decoration: none;
-    transform: translateX(-4px);
+
+  /* Ensure all prose content is cream colored */
+  .prose p,
+  .prose li,
+  .prose blockquote,
+  .prose strong,
+  .prose em,
+  .prose code {
+    color: #FDFBD4 !important; /* Cream color for all text */
   }
 
-  /* Responsive design */
-  @media (max-width: 1200px) {
-    .post-container {
-      flex-direction: column;
-    }
+  /* Links in prose should be slightly green but subtle */
+  .prose a {
+    color: #A7D193 !important; /* Light sage green for links */
   }
-  
-  @media (max-width: 768px) {
-    .post-container {
-      gap: 1rem;
-    }
 
-    .post-header h1 {
-      font-size: 2rem;
-    }
-    
-    .categories {
-      gap: 0.5rem;
-    }
-
-    .categories .category {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.6rem;
-    }
+  .prose a:hover {
+    color: #84B067 !important; /* Darker sage green on hover */
   }
 </style>

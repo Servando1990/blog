@@ -2,41 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ultra minimal theme */
 @layer base {
   html {
     font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
   }
   
+  /* Light theme */
   body {
-    @apply bg-surface-50 dark:bg-surface-900 text-text-700 dark:text-text-200;
+    background-color: #F4F5F8;
+    color: #1a1a1a;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold text-text-800 dark:text-text-100;
+  /* Dark theme */
+  .dark body {
+    background-color: #1a1a1a;
+    color: #F4F5F8;
   }
   
   a {
-    @apply text-accent-600 hover:text-accent-700 dark:text-accent-400 dark:hover:text-accent-300 no-underline hover:underline transition-colors;
+    color: inherit;
+    text-decoration: underline;
   }
   
-  p, li {
-    @apply text-text-600 dark:text-text-300 leading-relaxed;
+  a:hover {
+    opacity: 0.7;
   }
   
+  /* Code blocks */
   pre {
-    @apply bg-surface-800 text-surface-100 rounded-lg p-4 overflow-x-auto;
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1rem 0;
   }
   
   code {
-    @apply bg-surface-200 dark:bg-surface-700 text-text-700 dark:text-text-200 px-1 py-0.5 rounded text-sm;
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
   }
   
   pre code {
-    @apply bg-transparent p-0 text-inherit;
-  }
-  
-  /* Improve blockquote styling */
-  blockquote {
-    @apply border-l-4 border-accent-500 pl-4 italic text-text-600 dark:text-text-300 bg-surface-100 dark:bg-surface-800 py-3 my-4;
+    background: transparent;
+    padding: 0;
   }
 }

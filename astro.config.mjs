@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [mdx(), tailwind()],
   markdown: {
     shikiConfig: {
-      theme: 'github-dark',
+      theme: 'dark-plus',
       wrap: true
     },
     rehypePlugins: [
