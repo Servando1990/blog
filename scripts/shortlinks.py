@@ -55,4 +55,4 @@ def create(
         raise typer.Exit(2)
 
 if __name__ == "__main__":
-    app() 
+    app()
